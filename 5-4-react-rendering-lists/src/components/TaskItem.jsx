@@ -5,11 +5,15 @@ export default function TaskItem({ task, onToggle, onDelete }) {
 return (
 <li className="task" key={task.id}>
 <label className="taskMain">
+    {task.title}
 {/* 🟩 PART B (Anchor): Checkbox exists; students should wire onToggle(task.id) */}
-<input type="checkbox" />
-
+<input type="checkbox"
+       checked={task.isDone}
+       onChange={() => onToggle(task.id)}
+/>
 
 {/* 🟩 PART B (Anchor): Only render <DueBadge /> if task is NOT done (logical &&) */}
+    {!task.isDone && <DueBadge dueDate={task.dueDate} />}
 
 
 {/* Task title goes here */}
@@ -18,7 +22,7 @@ return (
 
 
 {/* 🟩 PART B (Anchor): Delete button should call onDelete(task.id) */}
-<button className="ghost" aria-label="Delete task">
+<button className="ghost" aria-label="Delete task" onClick={() => onDelete(task.id)}>
 ✕
 </button>
 </li>

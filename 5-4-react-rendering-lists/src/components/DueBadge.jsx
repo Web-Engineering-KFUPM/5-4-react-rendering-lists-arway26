@@ -15,10 +15,22 @@ export default function DueBadge({ dueDate }) {
   // d < 0 → "Overdue"
   // d === 0 → "Due today"
   // d === 1 → "1 day remaining"
-  // else → `${d} days remaining`
+  // else → ${d} days remaining
   // 3) Return <span className="badge"> with extra class:
   // "danger" if overdue, "warn" if due today
 
+    const d = daysUntil(dueDate);
+    const label =
+  d < 0
+    ? "Overdue"
+    : d === 0
+    ? "Due today"
+    : d === 1
+    ? "1 day remaining"
+    : `${d} days remaining`;
 
-  return <span className="badge">Label here</span>;
+    const className = d < 0 ? "badge danger" : d === 0 ? "badge warn" : "badge";
+    return <span className={className}>{label}</span>;
+
+    return <span className="badge">Label here</span>;
 }
